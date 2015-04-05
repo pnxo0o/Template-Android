@@ -1,0 +1,41 @@
+#
+# generated on 2015/03/30 10:30:29
+#
+# --table-start--
+dataClass=com.example.francisco.activities.Pelicula
+tableName=pelicula
+# --table-fields-start--
+# --field-start--
+fieldName=id
+id=true
+# --field-end--
+# --field-start--
+fieldName=title
+# --field-end--
+# --field-start--
+fieldName=releaseDateTheater
+# --field-end--
+# --field-start--
+fieldName=audienceScore
+# --field-end--
+# --field-start--
+fieldName=synopsis
+# --field-end--
+# --field-start--
+fieldName=urlThumbnail
+# --field-end--
+# --field-start--
+fieldName=urlSelf
+# --field-end--
+# --field-start--
+fieldName=urlCast
+# --field-end--
+# --field-start--
+fieldName=urlReviews
+# --field-end--
+# --field-start--
+fieldName=urlSimilar
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
