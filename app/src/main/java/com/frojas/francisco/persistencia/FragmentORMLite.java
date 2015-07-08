@@ -1,4 +1,4 @@
-package com.frojas.francisco.activities;
+package com.frojas.francisco.persistencia;
 
 import android.content.Context;
 import android.os.Bundle;

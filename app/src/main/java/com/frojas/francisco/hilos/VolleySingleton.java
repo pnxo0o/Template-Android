@@ -1,4 +1,4 @@
-package com.frojas.francisco.activities;
+package com.frojas.francisco.hilos;
 
 import android.graphics.Bitmap;
 import android.util.LruCache;
@@ -6,13 +6,14 @@ import android.util.LruCache;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
+import com.frojas.francisco.activities.MyApplication;
 
 /**
  * Created by Francisco on 24/03/2015.
  */
 public class VolleySingleton {
 
-    private static VolleySingleton sInstance=null;
+    private static VolleySingleton instanciaVolley =null;
     private ImageLoader mImageLoader;
     private RequestQueue mRequestQueue;
     private VolleySingleton(){
@@ -32,11 +33,11 @@ public class VolleySingleton {
         });
     }
     public static VolleySingleton getInstance(){
-        if(sInstance==null)
+        if(instanciaVolley ==null)
         {
-            sInstance=new VolleySingleton();
+            instanciaVolley =new VolleySingleton();
         }
-        return sInstance;
+        return instanciaVolley;
     }
     public RequestQueue getRequestQueue(){
         return mRequestQueue;

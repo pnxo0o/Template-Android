@@ -1,4 +1,4 @@
-package com.frojas.francisco.activities;
+package com.frojas.francisco.persistencia;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,7 +25,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
     private RuntimeExceptionDao<Pelicula, Long> peliculaRuntimeDAO=null;
 
     public DatabaseHelper(Context context){
-        //super(context, NOMBRE_BD, null, VERSION_BD, com.frojas.francisco.activities.R.raw.ormlite_config);
         super(context, NOMBRE_BD, null, VERSION_BD);
     }
 

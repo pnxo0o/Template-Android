@@ -12,8 +12,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.frojas.francisco.hilos.VolleySingleton;
 import com.frojas.francisco.pojo.Movie;
 
 import org.json.JSONArray;
@@ -39,7 +39,6 @@ public class FragmentBoxOffice extends Fragment  {
     private String mParam1;
     private String mParam2;
     private VolleySingleton volleySingleton;
-    private ImageLoader imageLoader;
     private RequestQueue requestQueue;
     private ArrayList<Movie> listMovies = new ArrayList<>();
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -56,11 +55,6 @@ public class FragmentBoxOffice extends Fragment  {
     public static final String KEY_SYNOPSIS="synopsis";
     public static final String KEY_POSTERS="posters";
     public static final String KEY_THUMBNAIL="thumbnail";
-    public static final String KEY_LINKS="links";
-    public static final String KEY_SELF="self";
-    public static final String KEY_CAST="cast";
-    public static final String KEY_REVIEWS="reviews";
-    public static final String KEY_SIMILAR="similar";
     public static final String URL_BOX_OFFICE = "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json";
     public static final String URL_CHAR_QUESTION = "?";
     public static final String URL_CHAR_AMEPERSAND = "&";
@@ -110,7 +104,6 @@ public class FragmentBoxOffice extends Fragment  {
       //  peliculaDao = getHelper().getRuntimeExceptionDao(Pelicula.class);
         volleySingleton = VolleySingleton.getInstance();
         requestQueue = volleySingleton.getRequestQueue();
-
 
     }
 

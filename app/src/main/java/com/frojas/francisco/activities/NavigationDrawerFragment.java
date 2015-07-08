@@ -15,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.frojas.francisco.pojo.Informacion;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,15 +41,15 @@ public class NavigationDrawerFragment extends Fragment {
     public NavigationDrawerFragment() {
     }
 
-    public static List<Information> getData() {
+    public static List<Informacion> getData() {
         //load only static data inside a drawer
-        List<Information> data = new ArrayList<>();
+        List<Informacion> data = new ArrayList<>();
         int[] icons = {com.frojas.francisco.activities.R.drawable.ic_number1, com.frojas.francisco.activities.R.drawable.ic_number2, com.frojas.francisco.activities.R.drawable.ic_number3, com.frojas.francisco.activities.R.drawable.ic_number4};
         String[] titles = {"Vivz", "Anky", "Slidenerd", "YouTube"};
         for (int i = 0; i < 4; i++) {
-            Information current = new Information();
-            current.iconId = icons[i % icons.length];
-            current.title = titles[i % titles.length];
+            Informacion current = new Informacion();
+            current.setIconId(icons[i % icons.length]);
+            current.setTitle(titles[i % titles.length]);
             data.add(current);
         }
         return data;

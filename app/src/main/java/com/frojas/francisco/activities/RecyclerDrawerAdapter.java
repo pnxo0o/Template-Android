@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.frojas.francisco.pojo.Informacion;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -16,11 +18,11 @@ import java.util.List;
  */
 public class RecyclerDrawerAdapter extends RecyclerView.Adapter<RecyclerDrawerAdapter.MyViewHolder> {
 
-    List<Information> data= Collections.emptyList();
+    List<Informacion> data= Collections.emptyList();
     private LayoutInflater inflater;
     private Context context;
 
-    public RecyclerDrawerAdapter(Context context, List<Information> data){
+    public RecyclerDrawerAdapter(Context context, List<Informacion> data){
         this.context=context;
         inflater=LayoutInflater.from(context);
         this.data=data;
@@ -40,9 +42,9 @@ public class RecyclerDrawerAdapter extends RecyclerView.Adapter<RecyclerDrawerAd
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Information current=data.get(position);
-        holder.title.setText(current.title);
-        holder.icon.setImageResource(current.iconId);
+        Informacion current=data.get(position);
+        holder.title.setText(current.getTitle());
+        holder.icon.setImageResource(current.getIconId());
     }
 
     @Override

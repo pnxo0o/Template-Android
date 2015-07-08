@@ -1,4 +1,4 @@
-package com.frojas.francisco.activities;
+package com.frojas.francisco.apk;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

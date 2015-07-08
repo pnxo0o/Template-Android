@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
+import com.frojas.francisco.hilos.VolleySingleton;
 import com.frojas.francisco.pojo.Movie;
 
 import java.util.ArrayList;
