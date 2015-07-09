@@ -40,7 +40,7 @@ public class TresFragment extends Fragment {
     private RequestQueue requestQueue;
     private ArrayList<Pelicula> listMovies = new ArrayList<>();
 
-    private AdapterBoxOffice2 adapterBoxOffice;
+    private Adaptador adapterBoxOffice;
     private RecyclerView listMovieHits;
 
 
@@ -134,7 +134,7 @@ public class TresFragment extends Fragment {
         View view = inflater.inflate(com.frojas.francisco.activities.R.layout.fragment_box_office, container, false);
         listMovieHits = (RecyclerView) view.findViewById(com.frojas.francisco.activities.R.id.listMovieHits);
         listMovieHits.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapterBoxOffice = new AdapterBoxOffice2(getActivity());
+        adapterBoxOffice = new Adaptador(getActivity());
         listMovieHits.setAdapter(adapterBoxOffice);
         sendJsonRequest();
         return view;

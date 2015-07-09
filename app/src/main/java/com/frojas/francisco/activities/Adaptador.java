@@ -19,14 +19,14 @@ import java.util.ArrayList;
 /**
  * Created by Francisco on 24/03/2015.
  */
-public class AdapterBoxOffice2 extends RecyclerView.Adapter<AdapterBoxOffice2.ViewHolderBoxOffice> {
+public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolderBoxOffice> {
 
     private ArrayList<Pelicula> listPeliculas=new ArrayList<>();
     private LayoutInflater layoutInflater;
     private VolleySingleton volleySingleton;
     private ImageLoader imageLoader;
 
-    public AdapterBoxOffice2(Context context) {
+    public Adaptador(Context context) {
         layoutInflater = LayoutInflater.from(context);
         volleySingleton=VolleySingleton.getInstance();
         imageLoader=volleySingleton.getImageLoader();

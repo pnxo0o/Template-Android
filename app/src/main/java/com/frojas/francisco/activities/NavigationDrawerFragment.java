@@ -36,7 +36,6 @@ public class NavigationDrawerFragment extends Fragment {
     private Fragment fragment1 = new UnoFragment();
     private Fragment fragment2 = new DosFragment();
     private Fragment fragment3 = new TresFragment();
-    private Fragment fragment4 = new FragmentBoxOffice();
 
     public NavigationDrawerFragment() {
     }
@@ -46,7 +45,7 @@ public class NavigationDrawerFragment extends Fragment {
         List<Informacion> data = new ArrayList<>();
         int[] icons = {com.frojas.francisco.activities.R.drawable.ic_number1, com.frojas.francisco.activities.R.drawable.ic_number2, com.frojas.francisco.activities.R.drawable.ic_number3, com.frojas.francisco.activities.R.drawable.ic_number4};
         String[] titles = {"Vivz", "Anky", "Slidenerd", "YouTube"};
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             Informacion current = new Informacion();
             current.setIconId(icons[i % icons.length]);
             current.setTitle(titles[i % titles.length]);
@@ -92,9 +91,6 @@ public class NavigationDrawerFragment extends Fragment {
                         break;
                     case 2:
                         ft.replace(com.frojas.francisco.activities.R.id.content_frame, fragment3);
-                        break;
-                    case 3:
-                        ft.replace(com.frojas.francisco.activities.R.id.content_frame, fragment4);
                         break;
                 }
                 ft.commit();
