@@ -39,7 +39,7 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolderBoxOffic
 
     @Override
     public ViewHolderBoxOffice onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.custom_movie_box_office, parent, false);
+        View view = layoutInflater.inflate(R.layout.pelicula_item, parent, false);
         ViewHolderBoxOffice viewHolder = new ViewHolderBoxOffice(view);
         return viewHolder;
     }

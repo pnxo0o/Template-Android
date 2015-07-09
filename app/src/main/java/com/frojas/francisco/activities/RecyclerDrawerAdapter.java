@@ -35,7 +35,7 @@ public class RecyclerDrawerAdapter extends RecyclerView.Adapter<RecyclerDrawerAd
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int i) {
-        View view = inflater.inflate(com.frojas.francisco.activities.R.layout.custom_row, parent, false);
+        View view = inflater.inflate(com.frojas.francisco.activities.R.layout.navigation_drawer_item, parent, false);
         MyViewHolder holder=new MyViewHolder(view);
         return holder;
     }
