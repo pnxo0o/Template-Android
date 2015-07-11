@@ -37,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == com.frojas.francisco.activities.R.id.action_settings) {
-            Toast.makeText(this,"Wena, presionastes"+item.getTitle(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Click"+item.getTitle(),Toast.LENGTH_SHORT).show();
             return true;
         }
         return super.onOptionsItemSelected(item);

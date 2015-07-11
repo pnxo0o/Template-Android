@@ -2,6 +2,7 @@ package com.frojas.francisco.parseadores;
 
 import com.frojas.francisco.pojo.Pelicula;
 import com.frojas.francisco.util.Constantes;
+import com.frojas.francisco.util.L;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,7 +33,7 @@ public class ParseadorPelicula {
 
                     //get the date in theaters for the current movie
                     JSONObject objectReleaseDates = currentMovie.getJSONObject(Constantes.KEY_RELEASE_DATES);
-                    String releaseDate = null;
+                    String releaseDate;
                     if (objectReleaseDates.has(Constantes.KEY_THEATER)) {
                         releaseDate = objectReleaseDates.getString(Constantes.KEY_THEATER);
                     } else {
@@ -69,9 +70,9 @@ public class ParseadorPelicula {
                 }
 
             } catch (JSONException e) {
-
+                L.error(e.toString());
             } catch (ParseException e) {
-
+                L.error(e.toString());
             }
         }
         return listMovies;

@@ -1,6 +1,7 @@
 package com.frojas.francisco.activities;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by Francisco on 24/03/2015.
  */
-public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolderBoxOffice> {
+public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolderPelicula> {
 
     private ArrayList<Pelicula> listPeliculas=new ArrayList<>();
     private LayoutInflater layoutInflater;
@@ -38,25 +39,25 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolderBoxOffic
     }
 
     @Override
-    public ViewHolderBoxOffice onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolderPelicula onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.pelicula_item, parent, false);
-        ViewHolderBoxOffice viewHolder = new ViewHolderBoxOffice(view);
+        ViewHolderPelicula viewHolder = new ViewHolderPelicula(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolderBoxOffice holder, int position) {
-        Pelicula currentPelicula=listPeliculas.get(position);
-        holder.PeliculaTitle.setText(currentPelicula.getTitle());
-        holder.PeliculaReleaseDate.setText(currentPelicula.getReleaseDateTheater().toString());
-        holder.PeliculaAudienceScore.setRating(currentPelicula.getAudienceScore()/20.0F);
-        String urlThumnail=currentPelicula.getUrlThumbnail();
+    public void onBindViewHolder(final ViewHolderPelicula holder, int position) {
+        Pelicula peliculaActual = listPeliculas.get(position);
+        holder.titulo.setText(peliculaActual.getTitle());
+        holder.fechaLanzamiento.setText(peliculaActual.getReleaseDateTheater().toString());
+        holder.puntuacion.setRating(peliculaActual.getAudienceScore() / 20.0F);
+        String urlThumnail=peliculaActual.getUrlThumbnail();
         if(urlThumnail!=null)
         {
             imageLoader.get(urlThumnail, new ImageLoader.ImageListener() {
                 @Override
                 public void onResponse(ImageLoader.ImageContainer response, boolean isImmediate) {
-                    holder.PeliculaThumbnail.setImageBitmap(response.getBitmap());
+                    holder.imagen.setImageBitmap(response.getBitmap());
                 }
 
                 @Override
@@ -73,19 +74,22 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolderBoxOffic
         return listPeliculas.size();
     }
 
-    static class ViewHolderBoxOffice extends RecyclerView.ViewHolder {
+    static class ViewHolderPelicula extends RecyclerView.ViewHolder  {
 
-        ImageView PeliculaThumbnail;
-        TextView PeliculaTitle;
-        TextView PeliculaReleaseDate;
-        RatingBar PeliculaAudienceScore;
+        private ImageView imagen;
+        private TextView titulo;
+        private TextView fechaLanzamiento;
+        private RatingBar puntuacion;
+        private CardView item;
 
-        public ViewHolderBoxOffice(View itemView) {
+        public ViewHolderPelicula(View itemView) {
             super(itemView);
-            PeliculaThumbnail = (ImageView) itemView.findViewById(R.id.movieThumbnail);
-            PeliculaTitle = (TextView) itemView.findViewById(R.id.movieTitle);
-            PeliculaReleaseDate = (TextView) itemView.findViewById(R.id.movieReleaseDate);
-            PeliculaAudienceScore = (RatingBar) itemView.findViewById(R.id.movieAudienceScore);
+            item = (CardView) itemView.findViewById(R.id.card);
+            imagen = (ImageView) itemView.findViewById(R.id.movieThumbnail);
+            titulo = (TextView) itemView.findViewById(R.id.movieTitle);
+            fechaLanzamiento = (TextView) itemView.findViewById(R.id.movieReleaseDate);
+            puntuacion = (RatingBar) itemView.findViewById(R.id.movieAudienceScore);
         }
+
     }
 }

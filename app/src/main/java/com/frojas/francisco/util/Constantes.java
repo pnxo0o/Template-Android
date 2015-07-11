@@ -5,6 +5,8 @@ package com.frojas.francisco.util;
  */
 public class Constantes {
 
+    public static final String NOMBRE_APLICACION = "Apk";
+
     //elementos del json que se instancian en pelicula
     public static final String KEY_MOVIES = "movies";
     public static final String KEY_ID = "id";
