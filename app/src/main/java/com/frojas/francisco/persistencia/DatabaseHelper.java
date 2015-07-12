@@ -42,7 +42,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try{
             TableUtils.dropTable(connectionSource, Pelicula.class, true);
-            onCreate(database,connectionSource);
+            onCreate(database, connectionSource);
         }catch(SQLException e){
             Log.e(DatabaseHelper.class.getSimpleName(), "Imposible eliminar la bd");
             throw new RuntimeException(e);
@@ -63,5 +63,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper{
     public void close(){
         super.close();
         peliculaDAO=null;
+        peliculaRuntimeDAO=null;
     }
 }

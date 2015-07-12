@@ -17,6 +17,7 @@ import com.frojas.francisco.hilos.VolleySingleton;
 import com.frojas.francisco.parseadores.ParseadorPelicula;
 import com.frojas.francisco.pojo.Pelicula;
 import com.frojas.francisco.util.Constantes;
+import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 import org.json.JSONObject;
@@ -27,10 +28,10 @@ import java.util.List;
 public class TresFragment extends PersistenciaFragment {
 
     private RequestQueue requestQueue;
-    private ArrayList<Pelicula> listMovies = new ArrayList<>();
 
     private Adaptador adapterBoxOffice;
-    private RecyclerView listMovieHits;
+    private RecyclerView recyclerListaPeliculas;
+    SwipeableRecyclerViewTouchListener swipeTouchListener;
 
     public TresFragment() {
 
@@ -41,12 +42,39 @@ public class TresFragment extends PersistenciaFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(com.frojas.francisco.activities.R.layout.fragment_3, container, false);
-        listMovieHits = (RecyclerView) view.findViewById(com.frojas.francisco.activities.R.id.listMovieHits);
-        listMovieHits.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerListaPeliculas = (RecyclerView) view.findViewById(com.frojas.francisco.activities.R.id.listMovieHits);
+        recyclerListaPeliculas.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapterBoxOffice = new Adaptador(getActivity());
-        listMovieHits.setAdapter(adapterBoxOffice);
+        recyclerListaPeliculas.setAdapter(adapterBoxOffice);
         //efectuamos la descarga
         sendJsonRequest();
+
+        //swipe de recyclerview
+        swipeTouchListener = new SwipeableRecyclerViewTouchListener(recyclerListaPeliculas,
+                new SwipeableRecyclerViewTouchListener.SwipeListener() {
+                    @Override
+                    public boolean canSwipe(int position) {
+                        return true;
+                    }
+
+                    @Override
+                    public void onDismissedBySwipeLeft(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                        for (int position : reverseSortedPositions) {
+                            eliminarPelicula(position);
+                        }
+                        adapterBoxOffice.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onDismissedBySwipeRight(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                        for (int position : reverseSortedPositions) {
+                            eliminarPelicula(position);
+                        }
+                        adapterBoxOffice.notifyDataSetChanged();
+                    }
+                });
+
+        recyclerListaPeliculas.addOnItemTouchListener(swipeTouchListener);
         return view;
     }
 
@@ -65,9 +93,8 @@ public class TresFragment extends PersistenciaFragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        listMovies= ParseadorPelicula.parseJSONResponse(response);
-                        agregarPeliculasBD(listMovies);
-                        adapterBoxOffice.setPeliculaList(listMovies);
+                        agregarPeliculasBD(ParseadorPelicula.parseJSONResponse(response));
+                        adapterBoxOffice.setPeliculaList(obtenerPeliculasBD());
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -78,7 +105,14 @@ public class TresFragment extends PersistenciaFragment {
         requestQueue.add(request);
     }
 
-    //metodo para agregar o actualizar datos a la bd
+    //metodo auxiliar para eliminar una pelicula
+    public void eliminarPelicula(int posicion){
+        eliminarPeliculaDB(adapterBoxOffice.getListPeliculas().get(posicion));
+        adapterBoxOffice.getListPeliculas().remove(posicion);
+        adapterBoxOffice.notifyItemRemoved(posicion);
+    }
+
+    //metodos de la bd
     public void agregarPeliculasBD(List<Pelicula> listaPeliculas){
         for(Pelicula itemPelicula : listaPeliculas){
             RuntimeExceptionDao<Pelicula, Long> dao = obtenerServicio().obtenerPeliculaRuntimeDao();
@@ -88,10 +122,14 @@ public class TresFragment extends PersistenciaFragment {
 
     public ArrayList<Pelicula> obtenerPeliculasBD(){
         ArrayList<Pelicula> listaPeliculas;
-        databaseHelper = obtenerServicio();
         RuntimeExceptionDao<Pelicula, Long> dao = obtenerServicio().obtenerPeliculaRuntimeDao();
         listaPeliculas = (ArrayList<Pelicula>)dao.queryForAll();
         return listaPeliculas;
+    }
+
+    public void eliminarPeliculaDB(Pelicula pelicula){
+        RuntimeExceptionDao<Pelicula, Long> dao = obtenerServicio().obtenerPeliculaRuntimeDao();
+        dao.delete(pelicula);
     }
 
 }

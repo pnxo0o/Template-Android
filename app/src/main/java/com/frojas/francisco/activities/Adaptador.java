@@ -38,6 +38,11 @@ public class Adaptador extends RecyclerView.Adapter<Adaptador.ViewHolderPelicula
         notifyItemRangeChanged(0, listPeliculas.size());
     }
 
+
+    public ArrayList<Pelicula> getListPeliculas() {
+        return listPeliculas;
+    }
+
     @Override
     public ViewHolderPelicula onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = layoutInflater.inflate(R.layout.pelicula_item, parent, false);
