@@ -2,13 +2,12 @@ package com.frojas.francisco.parseadores;
 
 import com.frojas.francisco.pojo.Pelicula;
 import com.frojas.francisco.util.Constantes;
-import com.frojas.francisco.util.L;
+import com.frojas.francisco.logger.L;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

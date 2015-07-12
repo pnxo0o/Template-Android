@@ -1,6 +1,8 @@
-package com.frojas.francisco.util;
+package com.frojas.francisco.logger;
 
 import android.util.Log;
+
+import com.frojas.francisco.util.Constantes;
 
 /**
  * Created by Francisco on 10/07/2015.
