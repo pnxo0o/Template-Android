@@ -7,23 +7,24 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.android.volley.Request;
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.frojas.francisco.abstractas.DescargaPeliculas;
 import com.frojas.francisco.abstractas.PersistenciaFragment;
 import com.frojas.francisco.hilos.TareaDescargasPeliculas;
 import com.frojas.francisco.hilos.VolleySingleton;
-import com.frojas.francisco.parseadores.ParseadorPelicula;
+import com.frojas.francisco.logger.L;
 import com.frojas.francisco.pojo.Pelicula;
-import com.frojas.francisco.util.Constantes;
 import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,6 +140,21 @@ public class TresFragment extends PersistenciaFragment implements SwipeRefreshLa
         }
         agregarPeliculasBD(listMovies);
         mAdaptadoPelicula.setPeliculaList(obtenerPeliculasBD());
+    }
+
+    private void handleVolleyError(VolleyError error) {
+        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+            Toast.makeText(getActivity(), getString(R.string.error_timeout), Toast.LENGTH_SHORT).show();
+            L.error(getString(R.string.error_timeout));
+        } else if (error instanceof AuthFailureError) {
+            Toast.makeText(getActivity(), getString(R.string.error_auth_failure), Toast.LENGTH_SHORT).show();
+        } else if (error instanceof ServerError) {
+            Toast.makeText(getActivity(), getString(R.string.error_auth_failure), Toast.LENGTH_SHORT).show();
+        } else if (error instanceof NetworkError) {
+            Toast.makeText(getActivity(), getString(R.string.error_network), Toast.LENGTH_SHORT).show();
+        } else if (error instanceof ParseError) {
+            Toast.makeText(getActivity(), getString(R.string.error_parser), Toast.LENGTH_SHORT).show();
+        }
     }
 
 }
